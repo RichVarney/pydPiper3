@@ -157,7 +157,7 @@ class musicdata_lms(musicdata.musicdata):
 				# Wait for notice that state has changed
 				try:
 					#self.idle_state = True
-					msg = self.rawserver.read_until("\n", self.timeout)
+					msg = self.rawserver.read_until("\n".encode('utf-8'), self.timeout)
 					#self.idle_state = False
 					self.status()
 					self.sendUpdate()
@@ -187,9 +187,9 @@ class musicdata_lms(musicdata.musicdata):
 			self.musicdata['state'] = "play"
 
 		# Update values
-		self.musicdata['artist'] = urllib.parse.unquote(str(self.dataplayer.request("artist ?", True))).decode('utf-8')
-		self.musicdata['title'] = urllib.parse.unquote(str(self.dataplayer.request("title ?", True))).decode('utf-8')
-		self.musicdata['album'] = urllib.parse.unquote(str(self.dataplayer.request("album ?", True))).decode('utf-8')
+		self.musicdata['artist'] = urllib.parse.unquote(str(self.dataplayer.request("artist ?", True)))
+		self.musicdata['title'] = urllib.parse.unquote(str(self.dataplayer.request("title ?", True)))
+		self.musicdata['album'] = urllib.parse.unquote(str(self.dataplayer.request("album ?", True)))
 
 		self.musicdata['volume'] = self.dataplayer.get_volume()
 
@@ -260,7 +260,7 @@ class musicdata_lms(musicdata.musicdata):
 
 		self.musicdata['musicdatasource'] = "LMS"
 
-		url = self.dataplayer.get_track_path().decode()
+		url = self.dataplayer.get_track_path()
 		self.musicdata['uri'] = url
 
 		urlp = urllib.parse.urlparse(url)
@@ -278,12 +278,12 @@ class musicdata_lms(musicdata.musicdata):
 
 		# Get bitrate and tracktype if they are available.  Try blocks used to prevent array out of bounds exception if values are not found
 		try:
-			self.musicdata['bitrate'] = urllib.parse.unquote(str(self.dataplayer.request("songinfo 2 1 url:"+url+" tags:r", True))).decode('utf-8').split("bitrate:", 1)[1]
+			self.musicdata['bitrate'] = urllib.parse.unquote(str(self.dataplayer.request("songinfo 2 1 url:"+url+" tags:r", True))).split("bitrate:", 1)[1]
 		except:
 			self.musicdata['bitrate'] = ""
 
 		try:
-			self.musicdata['encoding'] = urllib.parse.unquote(str(self.dataplayer.request("songinfo 2 1 url:"+url+" tags:o", True))).decode('utf-8').split("type:",1)[1]
+			self.musicdata['encoding'] = urllib.parse.unquote(str(self.dataplayer.request("songinfo 2 1 url:"+url+" tags:o", True))).split("type:",1)[1]
 		except:
 			self.musicdata['encoding'] = ""
 
@@ -297,8 +297,8 @@ class musicdata_lms(musicdata.musicdata):
 			timepos = time.strftime("%-M:%S", time.gmtime(int(self.musicdata['current'])))
 			remaining = timepos
 
-		self.musicdata['remaining'] = remaining.decode()
-		self.musicdata['elapsed_formatted'] = timepos.decode()
+		self.musicdata['remaining'] = remaining
+		self.musicdata['elapsed_formatted'] = timepos
 
 		# For backwards compatibility
 		self.musicdata['position'] = self.musicdata['elapsed_formatted']

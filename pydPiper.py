@@ -8,7 +8,7 @@
 import json, threading, logging, queue, time, sys, getopt, moment, signal, subprocess, os, copy, datetime, math, requests
 import pages
 import displays
-import sources
+import sources.musicdata_mpd, sources.musicdata_spop, sources.musicdata_lms, sources.musicdata_rune, sources.musicdata_volumio2
 import pydPiper_config
 import pause
 

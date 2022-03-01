@@ -53,7 +53,7 @@ class luma_i2c():
 		if devicetype.lower() == 'ssd1306':
 			self.device = ssd1306(serial)
 		elif devicetype.lower() == 'sh1106':
-			self.device = sh1106(serial)
+			self.device = sh1106(serial, rotate=2)
 		elif devicetype.lower() == 'ssd1322':
 			self.device = ssd1322(serial)
 		elif devicetype.lower() == 'ssd1325':

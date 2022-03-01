@@ -1015,7 +1015,7 @@ class gwidget(widget):
 			self.speed = speed # Used to slow scroll.  Speed is an integer that tells how many calls to scroll before an update is made
 			self.speedcount = speed
 			self.gap = gap
-			hesitatetype = hesitatetype.lower()
+			# hesitatetype = hesitatetype.lower()
 			self.hesitatetype = hesitatetype
 			self.hesitatetime = hesitatetime
 			self.threshold = threshold

@@ -1025,6 +1025,8 @@ class gwidget(widget):
 				self.direction = 'left'
 
 			# Set height and width for expanded image
+			if type(gap) != int:  # quick edit by RichVarney to prevent an error where for some reason gap == 'onstart' instead of an int
+				gap = 20  # just hard code gap to an int
 			self.eheight = self.widget.size[1] if self.direction in ['left','right'] else self.widget.size[1]+gap
 			self.ewidth = self.widget.size[0]+gap if self.direction in ['left','right'] else self.widget.size[0]
 

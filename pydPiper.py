@@ -562,7 +562,7 @@ class music_controller(threading.Thread):
                         p = os.popen("df -B 1 /")
                         line = p.readline()
                         line = p.readline()
-                        line = p.readline()
+                        # line = p.readline()  # one too many .readline()
 
                         va = line.split()
                        	avail = int(va[2])
